@@ -12,14 +12,25 @@ end
 # given an array of spicy foods, **return an array of strings**
 # with the names of each spicy food
 def get_names(spicy_foods)
-  # your code here
+  food_names = spicy_foods.map do |food|
+     food[:name]
+  end
+  food_names
 end
+
 
 # given an array of spicy foods, **return an array of hashes** 
 # where the heat level of the food is greater than 5
 def spiciest_foods(spicy_foods)
-  # your code here
+  hottest_food = []
+  spicy_foods.filter do |food| 
+    if food[:heat_level] > 5
+      hottest_food << food
+    end
+  end
+  hottest_food
 end
+
 
 # given an array of spicy foods, **output to the terminal**
 # each spicy food in the following format: 
@@ -27,19 +38,33 @@ end
 # HINT: you can use * with a string to produce the correct number of 🌶 emoji. 
 # "hello" * 3 == "hellohellohello"
 def print_spicy_foods(spicy_foods)
-  # your code here
+  spicy_foods.map do |food|
+    puts "#{food[:name]}"  + " (#{food[:cuisine]}) " + 
+    "|" + " Heat Level: #{"🌶" * food[:heat_level]}" 
+  end
 end
+
 
 # given an array of spicy foods and a string representing a cuisine, **return a single hash**  
 # for the spicy food whose cuisine matches the cuisine being passed to the method
 def get_spicy_food_by_cuisine(spicy_foods, cuisine)
-  # your code here
+  new_spicy_hash = {}
+  spicy_foods.filter do |food| 
+    if food[:cuisine] == cuisine
+      new_spicy_hash = food
+    end
+  end
+  new_spicy_hash
 end
+
 
 # Given an array of spicy foods, **return an array of hashes** 
 # sorted by heat level from lowest to highest
 def sort_by_heat(spicy_foods)
-  # your code here
+  sorted_food = spicy_foods.sort_by do |food|
+    food[:heat_level]
+  end
+  sorted_food
 end
 
 # given an array of spicy foods, output to the terminal ONLY 
@@ -47,11 +72,27 @@ end
 # Buffalo Wings (American) | Heat Level: 🌶🌶🌶
 # HINT: Try to use methods you've already written to solve this!
 def print_spiciest_foods(spicy_foods)
-  # your code here
+  formatted_foods = []
+  spicy_foods.filter do |food| 
+    if food[:heat_level] > 5
+      formatted_foods << food
+    end
+  end
+  formatted_foods.map do |food|
+    puts "#{food[:name]}"  + " (#{food[:cuisine]}) " + 
+    "|" + " Heat Level: #{"🌶" * food[:heat_level]}"   
+  end
 end
 
 # given an array of spicy foods, return an integer representing 
 # the average heat level of all the spicy foods in the array
 def average_heat_level(spicy_foods)
-  # your code here
+  average_heat = 0
+  food_heat_num = []
+  spicy_foods.each do |food|
+    food_heat_num << food[:heat_level]
+  end
+  heat_average = food_heat_num.sum / food_heat_num.length 
+  heat_average
 end
+average_heat_level(spicy_foods)
